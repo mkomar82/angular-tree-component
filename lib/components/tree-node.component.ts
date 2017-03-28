@@ -38,10 +38,10 @@ import { deprecatedSelector } from '../deprecated-selector';
         <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
         <tree-node-drop-slot [dropIndex]="node.index + 1" [node]="node.parent"></tree-node-drop-slot>
       </div>
-      <template
+      <ng-template
         [ngTemplateOutlet]="templates.treeNodeFullTemplate"
         [ngOutletContext]="{ $implicit: node, node: node, index: index, templates: templates }">
-      </template>
+      </ng-template>
     </ng-container>`
 })
 

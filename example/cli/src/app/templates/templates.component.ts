@@ -4,17 +4,17 @@ import { Component } from '@angular/core';
   selector: 'app-templates',
   template: `
     <tree-root id="tree1" [focused]="true" [nodes]="nodes1" [options]="options">
-      <template #treeNodeTemplate let-node let-index="index">
+      <ng-template #treeNodeTemplate let-node let-index="index">
         <span [class]="node.data.className + 'Index'">{{ index }}</span>
         <span [class]="node.data.className" [class.title]="true">{{ node.data.title }}</span>
-      </template>
-      <template #loadingTemplate let-node>
+      </ng-template>
+      <ng-template #loadingTemplate let-node>
         <div [class]="node.data.className + 'Loading'">Loading {{ node.data.title }}...</div>
-      </template>
+      </ng-template>
     </tree-root>
 
     <tree-root id="tree2" [focused]="true" [nodes]="nodes2">
-      <template #treeNodeFullTemplate let-node let-index="index">
+      <ng-template #treeNodeFullTemplate let-node let-index="index">
         <div
           [class.tree-node]="true"
           [class.tree-node-expanded]="node.isExpanded && node.hasChildren"
@@ -31,7 +31,7 @@ import { Component } from '@angular/core';
           </div>
           <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
         </div>
-      </template>
+      </ng-template>
     </tree-root>
   `,
   styles: []

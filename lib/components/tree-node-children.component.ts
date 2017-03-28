@@ -5,10 +5,6 @@ import { deprecatedSelector } from '../deprecated-selector';
 @Component({
   selector: 'TreeNodeChildren, tree-node-children',
   encapsulation: ViewEncapsulation.None,
-  styles: [
-    '.tree-children.tree-children-no-padding { padding-left: 0 }',
-    '.tree-children { padding-left: 20px }'
-  ],
   template: `
     <ng-container *mobxAutorun>
       <div [class.tree-children]="true"

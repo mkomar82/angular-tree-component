@@ -238,7 +238,7 @@ export class TreeModel implements ITreeModel {
     }
   }
 
-  @action setActiveNode(node, value, multi = false) {
+  @action setActiveNode(node, value, multi = false, expandTo = false) {
     if (multi) {
       this._setActiveNodeMulti(node, value);
     }
@@ -252,11 +252,28 @@ export class TreeModel implements ITreeModel {
     } else {
       this.fireEvent({ eventName: TREE_EVENTS.onDeactivate, node });
     }
+
+    if (expandTo) {
+      let currentNode = node;
+      while (currentNode.parent) {
+        this.addToExpandedNodeIds(currentNode.parent.id, value);
+        currentNode = currentNode.parent;
+      }
+      this._calculateExpandedNodes();
+    }
   }
 
   @action setExpandedNode(node, value) {
-    this.expandedNodeIds = Object.assign({}, this.expandedNodeIds, {[node.id]: value});
+    this.addToExpandedNodeIds(node.id, value);
     this.fireEvent({ eventName: TREE_EVENTS.onToggleExpanded, node, isExpanded: value });
+  }
+
+  addToExpandedNodeIds(nodeId, value) {
+    if (this.expandedNodeIds[nodeId]) {
+      this.expandedNodeIds[nodeId] = value;
+    } else {
+      this.expandedNodeIds = Object.assign({}, this.expandedNodeIds, {[nodeId]: value});
+    }
   }
 
   @action expandAll() {

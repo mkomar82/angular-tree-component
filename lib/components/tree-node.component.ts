@@ -35,7 +35,7 @@ import { deprecatedSelector } from '../deprecated-selector';
             </div>
           </div>
 
-        <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+        <tree-node-children *ngIf="nodeHasChildren" [node]="node" [templates]="templates"></tree-node-children>
         <tree-node-drop-slot [dropIndex]="node.index + 1" [node]="node.parent"></tree-node-drop-slot>
       </div>
       <ng-template
@@ -52,6 +52,10 @@ export class TreeNodeComponent {
 
   constructor(private elementRef: ElementRef) {
     deprecatedSelector('TreeNode', 'tree-node', elementRef);
+  }
+
+  get nodeHasChildren(){
+    return this.node.children && this.node.children.length > 0;
   }
 
 }

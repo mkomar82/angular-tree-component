@@ -1,6 +1,6 @@
 {
-  "name": "angular-tree-component",
-  "version": "3.2.3",
+  "name": "angular-icm-tree",
+  "version": "4.0.2",
   "description": "A simple yet powerful tree component for Angular2",
   "author": "Adam Klein <adam@500tech.com>",
   "homepage": "https://github.com/500tech/angular-tree-component",
@@ -40,11 +40,9 @@
     "lint": "tslint lib/**/*.ts",
     "rollup": "rollup -c rollup.config.js dist/angular-tree-component.js > dist/angular-tree-component.umd.js",
     "build": "npm run lint && npm run clean:typescript && ngc && npm run rollup",
-    "example:cli": "ngc && cp -rf dist example/cli/node_modules/angular-tree-component/ && cd example/cli && ng serve",
-    "example:cli:build": "cd example/cli && cp src/index.build.html src/index.html && ng build --aot && cp src/index.dev.html src/index.html",
     "test": "protractor protractor.conf.js",
     "pretest": "npm run e2e:tsc",
-    "prepublish": "npm run build && npm run example:cli:build",
+    "prepublish": "npm run build",
     "e2e:tsc": "cd e2e && tsc"
   },
   "files": [
@@ -54,25 +52,21 @@
   "contributors": [
     "Adam Klein <adam@500tech.com>"
   ],
-  "peerDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/core": "^2.0.0"
-  },
   "dependencies": {
     "lodash-es": "4.17.4",
     "mobx": "^3.1.0",
     "ng2-mobx": "^1.2.9"
   },
   "devDependencies": {
-    "@angular/animations": "4.0.0",
-    "@angular/common": "4.0.0",
-    "@angular/compiler": "4.0.0",
-    "@angular/compiler-cli": "4.0.0",
-    "@angular/core": "4.0.0",
-    "@angular/http": "4.0.0",
-    "@angular/platform-browser": "4.0.0",
-    "@angular/platform-browser-dynamic": "4.0.0",
-    "@angular/platform-server": "4.0.0",
+    "@angular/animations": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/platform-server": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/lodash-es": "4.14.4",
     "@types/node": "^6.0.38",
@@ -88,9 +82,9 @@
     "rollup-plugin-commonjs": "7.0.2",
     "rollup-plugin-node-resolve": "2.0.0",
     "rxjs": "^5.0.0",
-    "tslint": "4.4.2",
+    "tslint": "^4.5.1",
     "typedoc": "^0.3.12",
-    "typescript": "^2.1.4",
+    "typescript": "^2.2.1",
     "zone.js": "^0.8.4"
   },
   "repository": "https://github.com/500tech/angular-tree-component.git",

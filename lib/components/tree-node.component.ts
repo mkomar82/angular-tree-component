@@ -5,24 +5,6 @@ import { deprecatedSelector } from '../deprecated-selector';
 @Component({
   selector: 'TreeNode, tree-node',
   encapsulation: ViewEncapsulation.None,
-  styles: [
-    `.node-content-wrapper {
-      display: inline-block;
-      padding: 2px 5px;
-      border-radius: 2px;
-      transition: background-color .15s,box-shadow .15s;
-    }`,
-    '.node-wrapper {display: flex; align-items: flex-start;}',
-    '.tree-node-active > .node-wrapper > .node-content-wrapper { background: #beebff }',
-    '.tree-node-active.tree-node-focused > .node-wrapper > .node-content-wrapper { background: #beebff }',
-    '.tree-node-focused > .node-wrapper > .node-content-wrapper { background: #e7f4f9 }',
-    '.node-content-wrapper:hover { background: #f7fbff }',
-    `.tree-node-active > .node-wrapper > .node-content-wrapper, .tree-node-focused > .node-content-wrapper, .node-content-wrapper:hover {
-      box-shadow: inset 0 0 1px #999;
-    }`,
-    '.node-content-wrapper.is-dragging-over { background: #ddffee; box-shadow: inset 0 0 1px #999; }',
-    '.node-content-wrapper.is-dragging-over-disabled { opacity: 0.5 }'
-  ],
   template: `
     <ng-container *mobxAutorun>
       <div
@@ -53,13 +35,13 @@ import { deprecatedSelector } from '../deprecated-selector';
             </div>
           </div>
 
-        <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+        <tree-node-children *ngIf="nodeHasChildren" [node]="node" [templates]="templates"></tree-node-children>
         <tree-node-drop-slot [dropIndex]="node.index + 1" [node]="node.parent"></tree-node-drop-slot>
       </div>
-      <template
+      <ng-template
         [ngTemplateOutlet]="templates.treeNodeFullTemplate"
         [ngOutletContext]="{ $implicit: node, node: node, index: index, templates: templates }">
-      </template>
+      </ng-template>
     </ng-container>`
 })
 
@@ -70,6 +52,10 @@ export class TreeNodeComponent {
 
   constructor(private elementRef: ElementRef) {
     deprecatedSelector('TreeNode', 'tree-node', elementRef);
+  }
+
+  get nodeHasChildren(){
+    return this.node.children && this.node.children.length > 0;
   }
 
 }

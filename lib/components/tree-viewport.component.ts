@@ -15,7 +15,7 @@ const isFirefox = navigator && navigator.userAgent && navigator.userAgent.indexO
   styles: [
     `:host {
       height: 100%;
-      overflow: auto;
+      overflow: visible;
       display: block;
     }`
   ],
